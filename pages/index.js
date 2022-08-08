@@ -1,7 +1,22 @@
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+  const router = useRouter()
+  const { data: session, status } = useSession()
+
+  const loading = status === 'loading'
+
+  if (loading) {
+    return null
+  }
+
+  if (session) {
+    router.push('/dashboard')
+    return
+  }
   return (
     <div>
       <Head>
@@ -16,7 +31,7 @@ export default function Home() {
         <p className='mt-10'>Free 7 days trial then just $19.99/m</p>
 
         <div className='mt-10'>
-          <a className='bg-black text-white px-5 py-2' href='/api/auth/sign'>
+          <a className='bg-black text-white px-5 py-2' href='/api/auth/signin'>
             Log in
           </a>
         </div>
