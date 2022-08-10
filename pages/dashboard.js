@@ -76,7 +76,27 @@ export default function Dashboard({ projects }) {
               <ol className='mt-4 text-left'>
                 {project.todos.map((todo, todo_index) => (
                   <li key={todo_index}>
-                    <span>◽️</span> {todo.name}
+                    <span
+                      className='cursor-pointer'
+                      onClick={async (e) => {
+                        e.preventDefault()
+                        await fetch('/api/complete', {
+                          body: JSON.stringify({
+                            id: todo.id,
+                          }),
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          method: 'POST',
+                        })
+                        router.reload()
+                      }}
+                    >
+                      {todo.done ? '✅' : '◻️'}
+                    </span>{' '}
+                    <span className={`${todo.done ? 'line-through' : ''}`}>
+                      {todo.name}
+                    </span>
                   </li>
                 ))}
               </ol>
