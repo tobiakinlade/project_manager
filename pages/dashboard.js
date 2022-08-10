@@ -142,6 +142,21 @@ export default function Dashboard({ projects }) {
             </div>
           ))}
         </div>
+
+        <p
+          className='mt-20 text-center text-xs hover:underline 
+        cursor-pointer'
+          onClick={async (e) => {
+            e.preventDefault()
+
+            await fetch('/api/cancel', {
+              method: 'POST',
+            })
+            router.reload()
+          }}
+        >
+          cancel your subscription
+        </p>
       </div>
     </div>
   )
