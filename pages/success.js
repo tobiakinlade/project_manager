@@ -33,7 +33,7 @@ export default function Success() {
     router.push('/')
     return
   }
-  return <div>S</div>
+  return <div></div>
 }
 
 export async function getServerSideProps(context) {
