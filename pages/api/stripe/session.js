@@ -1,4 +1,3 @@
-import { request } from 'express'
 import prisma from 'lib/prisma'
 import { getSession } from 'next-auth/react'
 
