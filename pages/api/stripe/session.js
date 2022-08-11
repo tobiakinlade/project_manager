@@ -19,7 +19,7 @@ export default async (req, res) => {
 
   if (!user) return res.status(401).json({ message: 'User not found' })
 
-  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+  const stripe = require('stripe')`${process.env.STRIPE_SECRET_KEY}`
   const stripe_session = await stripe.checkout.sessions.create({
     billing_address_collection: 'auto',
     line_items: [
